@@ -1,0 +1,238 @@
+<!DOCTYPE html>
+<html lang="ko" class="scroll-smooth">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>취미생활 - 음악에 취하다</title>
+  <!-- Tailwind CSS CDN -->
+  <script src="https://cdn.tailwindcss.com"></script>
+  <!-- Lucide Icons -->
+  <script src="https://unpkg.com/lucide@latest"></script>
+  <script>
+    tailwind.config = {
+      darkMode: 'class',
+      theme: {
+        extend: {
+          colors: {
+            brand: {
+              indie: '#8b5cf6', // 인디 보라
+              ballad: '#f472b6', // 발라드 핑크
+              etc: '#3b82f6', // 그 외 블루
+            }
+          }
+        }
+      }
+    }
+  </script>
+  <style>
+    .transition-theme { transition: background-color 0.3s ease, color 0.3s ease, border-color 0.3s ease; }
+    .fade-in { animation: fadeIn 0.4s ease-out forwards; }
+    @keyframes fadeIn { from { opacity: 0; transform: translateY(10px); } to { opacity: 1; transform: translateY(0); } }
+  </style>
+</head>
+<body class="bg-slate-50 text-slate-800 dark:bg-slate-900 dark:text-slate-100 min-h-screen font-sans transition-theme">
+
+  <!-- 1. 상단 네비게이션 바 -->
+  <header class="sticky top-0 z-50 backdrop-blur-md bg-white/80 dark:bg-slate-900/80 border-b border-slate-200 dark:border-slate-800 transition-theme">
+    <div class="max-w-6xl mx-auto px-4 h-20 flex items-center justify-between">
+      <a href="index.html" class="flex items-center gap-2 font-bold text-xl text-indigo-600 dark:text-indigo-400">
+        <i data-lucide="arrow-left" class="w-5 h-5"></i>
+        <span>메인으로</span>
+      </a>
+      <nav class="hidden md:flex items-center gap-5">
+        <a href="game.html" class="flex items-center gap-2 text-sm font-semibold px-4 py-2.5 rounded-xl border border-slate-200 dark:border-slate-700 bg-white/50 dark:bg-slate-800/50 hover:border-indigo-500 hover:text-indigo-600 dark:hover:border-indigo-400 dark:hover:bg-slate-800 hover:shadow-sm transition-all">
+          <i data-lucide="gamepad-2" class="w-4.5 h-4.5 text-indigo-500"></i> 게임
+        </a>
+        <a href="music.html" class="flex items-center gap-2 text-sm font-bold px-4 py-2.5 rounded-xl border border-pink-500 bg-pink-50/50 dark:bg-pink-950/40 text-pink-600 dark:text-pink-400 shadow-sm transition-all">
+          <i data-lucide="music" class="w-4.5 h-4.5 text-pink-500"></i> 음악
+        </a>
+        <a href="travel.html" class="flex items-center gap-2 text-sm font-semibold px-4 py-2.5 rounded-xl border border-slate-200 dark:border-slate-700 bg-white/50 dark:bg-slate-800/50 hover:border-indigo-500 hover:text-indigo-600 dark:hover:border-indigo-400 dark:hover:bg-slate-800 hover:shadow-sm transition-all">
+          <i data-lucide="compass" class="w-4.5 h-4.5 text-emerald-500"></i> 여행
+        </a>
+      </nav>
+      <div class="flex items-center gap-4">
+        <button id="theme-toggle" class="p-2.5 rounded-xl bg-slate-100 dark:bg-slate-800 hover:ring-2 hover:ring-indigo-500/50 transition-all">
+          <i id="theme-icon" data-lucide="moon" class="w-5 h-5 text-slate-600 dark:text-slate-300"></i>
+        </button>
+      </div>
+    </div>
+  </header>
+
+  <!-- 2. 메인 콘텐츠 -->
+  <main class="max-w-6xl mx-auto px-4 py-12 space-y-10">
+    <section class="text-center space-y-4">
+      <h1 class="text-4xl font-extrabold tracking-tight">취미생활: 음악 수집함 (Music Room)</h1>
+      <p class="text-slate-500 dark:text-slate-400">장르별로 제가 즐겨 듣는 소중한 곡들을 모아두었습니다.</p>
+    </section>
+
+    <!-- 필터 버튼 -->
+    <section class="flex flex-wrap justify-center gap-3">
+      <button onclick="filterMusic('all')" id="btn-all" class="filter-btn px-5 py-2 text-sm font-bold rounded-full bg-indigo-600 text-white shadow-sm transition-all">전체</button>
+      <button onclick="filterMusic('indie')" id="btn-indie" class="filter-btn px-5 py-2 text-sm font-semibold rounded-full bg-white dark:bg-slate-800 border border-slate-200 dark:border-slate-700 hover:border-purple-500 hover:text-purple-500 transition-all text-slate-600 dark:text-slate-300">인디</button>
+      <button onclick="filterMusic('ballad')" id="btn-ballad" class="filter-btn px-5 py-2 text-sm font-semibold rounded-full bg-white dark:bg-slate-800 border border-slate-200 dark:border-slate-700 hover:border-pink-500 hover:text-pink-500 transition-all text-slate-600 dark:text-slate-300">발라드</button>
+      <button onclick="filterMusic('etc')" id="btn-etc" class="filter-btn px-5 py-2 text-sm font-semibold rounded-full bg-white dark:bg-slate-800 border border-slate-200 dark:border-slate-700 hover:border-blue-500 hover:text-blue-500 transition-all text-slate-600 dark:text-slate-300">그 외</button>
+    </section>
+
+    <!-- 음악 카드 컨테이너 -->
+    <section id="music-container" class="grid grid-cols-2 md:grid-cols-4 gap-6 max-w-5xl mx-auto">
+      
+      <!-- 인디 카테고리 (4곡) -->
+      <div class="music-card-wrapper fade-in col-span-2 md:col-span-1" data-genre="indie">
+        <div class="bg-white dark:bg-slate-800 p-4 rounded-3xl border border-slate-100 dark:border-slate-800 shadow-sm hover:shadow-lg transition-all">
+          <div class="h-32 bg-purple-100 dark:bg-purple-900/30 rounded-2xl mb-4 flex items-center justify-center text-purple-500">
+            <i data-lucide="guitar" class="w-12 h-12"></i>
+          </div>
+          <h3 class="font-bold text-sm">주저하는 연인들을 위해</h3>
+          <p class="text-xs text-slate-500 mt-1">잔나비</p>
+        </div>
+      </div>
+      <div class="music-card-wrapper fade-in col-span-2 md:col-span-1" data-genre="indie">
+        <div class="bg-white dark:bg-slate-800 p-4 rounded-3xl border border-slate-100 dark:border-slate-800 shadow-sm hover:shadow-lg transition-all">
+          <div class="h-32 bg-purple-100 dark:bg-purple-900/30 rounded-2xl mb-4 flex items-center justify-center text-purple-500">
+            <i data-lucide="music-4" class="w-12 h-12"></i>
+          </div>
+          <h3 class="font-bold text-sm">사건의 지평선</h3>
+          <p class="text-xs text-slate-500 mt-1">윤하</p>
+        </div>
+      </div>
+      <div class="music-card-wrapper fade-in col-span-2 md:col-span-1" data-genre="indie">
+        <div class="bg-white dark:bg-slate-800 p-4 rounded-3xl border border-slate-100 dark:border-slate-800 shadow-sm hover:shadow-lg transition-all">
+          <div class="h-32 bg-purple-100 dark:bg-purple-900/30 rounded-2xl mb-4 flex items-center justify-center text-purple-500">
+            <i data-lucide="radio" class="w-12 h-12"></i>
+          </div>
+          <h3 class="font-bold text-sm">비행운</h3>
+          <p class="text-xs text-slate-500 mt-1">문문</p>
+        </div>
+      </div>
+      <div class="music-card-wrapper fade-in col-span-2 md:col-span-1" data-genre="indie">
+        <div class="bg-white dark:bg-slate-800 p-4 rounded-3xl border border-slate-100 dark:border-slate-800 shadow-sm hover:shadow-lg transition-all">
+          <div class="h-32 bg-purple-100 dark:bg-purple-900/30 rounded-2xl mb-4 flex items-center justify-center text-purple-500">
+            <i data-lucide="disc" class="w-12 h-12"></i>
+          </div>
+          <h3 class="font-bold text-sm">기다림</h3>
+          <p class="text-xs text-slate-500 mt-1">검정치마</p>
+        </div>
+      </div>
+
+      <!-- 발라드 카테고리 (4곡) -->
+      <div class="music-card-wrapper fade-in col-span-2 md:col-span-1" data-genre="ballad">
+        <div class="bg-white dark:bg-slate-800 p-4 rounded-3xl border border-slate-100 dark:border-slate-800 shadow-sm hover:shadow-lg transition-all">
+          <div class="h-32 bg-pink-100 dark:bg-pink-900/30 rounded-2xl mb-4 flex items-center justify-center text-pink-500">
+            <i data-lucide="mic" class="w-12 h-12"></i>
+          </div>
+          <h3 class="font-bold text-sm">기억의 습작</h3>
+          <p class="text-xs text-slate-500 mt-1">김동률</p>
+        </div>
+      </div>
+      <div class="music-card-wrapper fade-in col-span-2 md:col-span-1" data-genre="ballad">
+        <div class="bg-white dark:bg-slate-800 p-4 rounded-3xl border border-slate-100 dark:border-slate-800 shadow-sm hover:shadow-lg transition-all">
+          <div class="h-32 bg-pink-100 dark:bg-pink-900/30 rounded-2xl mb-4 flex items-center justify-center text-pink-500">
+            <i data-lucide="heart" class="w-12 h-12"></i>
+          </div>
+          <h3 class="font-bold text-sm">야생화</h3>
+          <p class="text-xs text-slate-500 mt-1">박효신</p>
+        </div>
+      </div>
+      <div class="music-card-wrapper fade-in col-span-2 md:col-span-1" data-genre="ballad">
+        <div class="bg-white dark:bg-slate-800 p-4 rounded-3xl border border-slate-100 dark:border-slate-800 shadow-sm hover:shadow-lg transition-all">
+          <div class="h-32 bg-pink-100 dark:bg-pink-900/30 rounded-2xl mb-4 flex items-center justify-center text-pink-500">
+            <i data-lucide="cloud-rain" class="w-12 h-12"></i>
+          </div>
+          <h3 class="font-bold text-sm">눈의 꽃</h3>
+          <p class="text-xs text-slate-500 mt-1">박효신</p>
+        </div>
+      </div>
+      <div class="music-card-wrapper fade-in col-span-2 md:col-span-1" data-genre="ballad">
+        <div class="bg-white dark:bg-slate-800 p-4 rounded-3xl border border-slate-100 dark:border-slate-800 shadow-sm hover:shadow-lg transition-all">
+          <div class="h-32 bg-pink-100 dark:bg-pink-900/30 rounded-2xl mb-4 flex items-center justify-center text-pink-500">
+            <i data-lucide="clock" class="w-12 h-12"></i>
+          </div>
+          <h3 class="font-bold text-sm">서른 즈음에</h3>
+          <p class="text-xs text-slate-500 mt-1">김광석</p>
+        </div>
+      </div>
+
+      <!-- 그 외 카테고리 (4곡) -->
+      <div class="music-card-wrapper fade-in col-span-2 md:col-span-1" data-genre="etc">
+        <div class="bg-white dark:bg-slate-800 p-4 rounded-3xl border border-slate-100 dark:border-slate-800 shadow-sm hover:shadow-lg transition-all">
+          <div class="h-32 bg-blue-100 dark:bg-blue-900/30 rounded-2xl mb-4 flex items-center justify-center text-blue-500">
+            <i data-lucide="zap" class="w-12 h-12"></i>
+          </div>
+          <h3 class="font-bold text-sm">Butter</h3>
+          <p class="text-xs text-slate-500 mt-1">BTS</p>
+        </div>
+      </div>
+      <div class="music-card-wrapper fade-in col-span-2 md:col-span-1" data-genre="etc">
+        <div class="bg-white dark:bg-slate-800 p-4 rounded-3xl border border-slate-100 dark:border-slate-800 shadow-sm hover:shadow-lg transition-all">
+          <div class="h-32 bg-blue-100 dark:bg-blue-900/30 rounded-2xl mb-4 flex items-center justify-center text-blue-500">
+            <i data-lucide="sparkles" class="w-12 h-12"></i>
+          </div>
+          <h3 class="font-bold text-sm">Dynamite</h3>
+          <p class="text-xs text-slate-500 mt-1">BTS</p>
+        </div>
+      </div>
+      <div class="music-card-wrapper fade-in col-span-2 md:col-span-1" data-genre="etc">
+        <div class="bg-white dark:bg-slate-800 p-4 rounded-3xl border border-slate-100 dark:border-slate-800 shadow-sm hover:shadow-lg transition-all">
+          <div class="h-32 bg-blue-100 dark:bg-blue-900/30 rounded-2xl mb-4 flex items-center justify-center text-blue-500">
+            <i data-lucide="star" class="w-12 h-12"></i>
+          </div>
+          <h3 class="font-bold text-sm">Hype Boy</h3>
+          <p class="text-xs text-slate-500 mt-1">NewJeans</p>
+        </div>
+      </div>
+      <div class="music-card-wrapper fade-in col-span-2 md:col-span-1" data-genre="etc">
+        <div class="bg-white dark:bg-slate-800 p-4 rounded-3xl border border-slate-100 dark:border-slate-800 shadow-sm hover:shadow-lg transition-all">
+          <div class="h-32 bg-blue-100 dark:bg-blue-900/30 rounded-2xl mb-4 flex items-center justify-center text-blue-500">
+            <i data-lucide="message-circle" class="w-12 h-12"></i>
+          </div>
+          <h3 class="font-bold text-sm">Ditto</h3>
+          <p class="text-xs text-slate-500 mt-1">NewJeans</p>
+        </div>
+      </div>
+
+    </section>
+  </main>
+
+  <script>
+    lucide.createIcons();
+
+    // 테마 토글
+    const themeToggleBtn = document.getElementById('theme-toggle');
+    const themeIcon = document.getElementById('theme-icon');
+    if (localStorage.theme === 'dark' || (!('theme' in localStorage) && window.matchMedia('(prefers-color-scheme: dark)').matches)) {
+      document.documentElement.classList.add('dark');
+      themeIcon.setAttribute('data-lucide', 'sun');
+    }
+    themeToggleBtn.addEventListener('click', () => {
+      const isDark = document.documentElement.classList.toggle('dark');
+      localStorage.theme = isDark ? 'dark' : 'light';
+      themeIcon.setAttribute('data-lucide', isDark ? 'sun' : 'moon');
+      lucide.createIcons();
+    });
+
+    // 장르 필터링 함수
+    function filterMusic(genre) {
+      const wrappers = document.querySelectorAll('.music-card-wrapper');
+      const buttons = document.querySelectorAll('.filter-btn');
+
+      // 버튼 색상 업데이트
+      buttons.forEach(btn => {
+        if (btn.id === `btn-${genre}`) {
+          btn.className = "filter-btn px-5 py-2 text-sm font-bold rounded-full bg-indigo-600 text-white shadow-sm transition-all";
+        } else {
+          btn.className = "filter-btn px-5 py-2 text-sm font-semibold rounded-full bg-white dark:bg-slate-800 border border-slate-200 dark:border-slate-700 hover:border-indigo-500 hover:text-indigo-500 transition-all text-slate-600 dark:text-slate-300";
+        }
+      });
+
+      // 카드 노출 제어
+      wrappers.forEach(wrap => {
+        if (genre === 'all' || wrap.getAttribute('data-genre') === genre) {
+          wrap.style.display = 'block';
+        } else {
+          wrap.style.display = 'none';
+        }
+      });
+    }
+  </script>
+</body>
+</html>
