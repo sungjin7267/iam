@@ -68,7 +68,7 @@
     <!-- 필터 버튼 -->
     <section class="flex flex-wrap justify-center gap-3">
       <button onclick="filterMusic('all')" id="btn-all" class="filter-btn px-5 py-2 text-sm font-bold rounded-full bg-indigo-600 text-white shadow-sm transition-all">전체</button>
-      <button onclick="filterMusic('indie')" id="btn-indie" class="filter-btn px-5 py-2 text-sm font-semibold rounded-full bg-white dark:bg-slate-800 border border-slate-200 dark:border-slate-700 hover:border-purple-500 hover:text-purple-500 transition-all text-slate-600 dark:text-slate-300">인디</button>
+      <button onclick="filterMusic('indie')" id="btn-indie" class="filter-btn px-5 py-2 text-sm font-semibold rounded-full bg-white dark:bg-slate-800 border border-slate-200 dark:border-slate-700 hover:border-purple-500 hover:text-purple-500 transition-all text-slate-600 dark:text-slate-300">밴드</button>
       <button onclick="filterMusic('ballad')" id="btn-ballad" class="filter-btn px-5 py-2 text-sm font-semibold rounded-full bg-white dark:bg-slate-800 border border-slate-200 dark:border-slate-700 hover:border-pink-500 hover:text-pink-500 transition-all text-slate-600 dark:text-slate-300">발라드</button>
       <button onclick="filterMusic('etc')" id="btn-etc" class="filter-btn px-5 py-2 text-sm font-semibold rounded-full bg-white dark:bg-slate-800 border border-slate-200 dark:border-slate-700 hover:border-blue-500 hover:text-blue-500 transition-all text-slate-600 dark:text-slate-300">그 외</button>
     </section>
@@ -78,117 +78,176 @@
       
       <!-- 인디 카테고리 (4곡) -->
       <div class="music-card-wrapper fade-in col-span-2 md:col-span-1" data-genre="indie">
-        <div class="bg-white dark:bg-slate-800 p-4 rounded-3xl border border-slate-100 dark:border-slate-800 shadow-sm hover:shadow-lg transition-all">
-          <div class="h-32 bg-purple-100 dark:bg-purple-900/30 rounded-2xl mb-4 flex items-center justify-center text-purple-500">
-            <i data-lucide="guitar" class="w-12 h-12"></i>
-          </div>
-          <h3 class="font-bold text-sm">주저하는 연인들을 위해</h3>
-          <p class="text-xs text-slate-500 mt-1">잔나비</p>
-        </div>
-      </div>
+      <div class="bg-white dark:bg-slate-800 p-4 rounded-3xl border border-slate-100 dark:border-slate-800 shadow-sm hover:shadow-lg transition-all">
+    
+      <div class="h-32 bg-purple-100 dark:bg-purple-900/30 rounded-2xl mb-4 flex items-center justify-center text-purple-500 overflow-hidden">
+      
+      <img src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcTYYceeUR5yqLyLR2RdGQe06fO03kyJnnBBIIgBpxCvzw&s=10" 
+           class="w-full h-full object-cover">
+           
+    </div>
+    
+    <h3 class="font-bold text-sm">한 페이지가 될 수 있게</h3>
+    <p class="text-xs text-slate-500 mt-1">데이식스</p>
+  </div>
+</div>
       <div class="music-card-wrapper fade-in col-span-2 md:col-span-1" data-genre="indie">
-        <div class="bg-white dark:bg-slate-800 p-4 rounded-3xl border border-slate-100 dark:border-slate-800 shadow-sm hover:shadow-lg transition-all">
-          <div class="h-32 bg-purple-100 dark:bg-purple-900/30 rounded-2xl mb-4 flex items-center justify-center text-purple-500">
-            <i data-lucide="music-4" class="w-12 h-12"></i>
-          </div>
-          <h3 class="font-bold text-sm">사건의 지평선</h3>
-          <p class="text-xs text-slate-500 mt-1">윤하</p>
-        </div>
-      </div>
+      <div class="bg-white dark:bg-slate-800 p-4 rounded-3xl border border-slate-100 dark:border-slate-800 shadow-sm hover:shadow-lg transition-all">
+    
+      <div class="h-32 bg-purple-100 dark:bg-purple-900/30 rounded-2xl mb-4 flex items-center justify-center text-purple-500 overflow-hidden">
+      
+      <img src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcR7SQx0gawqZ_Iqd2xuRBYmzDI9ULAAOBqWB3HxsEahhA&s" 
+           class="w-full h-full object-cover">
+           
+    </div>
+    
+    <h3 class="font-bold text-sm">Drowning</h3>
+    <p class="text-xs text-slate-500 mt-1">WOODZ</p>
+  </div>
+</div>
       <div class="music-card-wrapper fade-in col-span-2 md:col-span-1" data-genre="indie">
-        <div class="bg-white dark:bg-slate-800 p-4 rounded-3xl border border-slate-100 dark:border-slate-800 shadow-sm hover:shadow-lg transition-all">
-          <div class="h-32 bg-purple-100 dark:bg-purple-900/30 rounded-2xl mb-4 flex items-center justify-center text-purple-500">
-            <i data-lucide="radio" class="w-12 h-12"></i>
-          </div>
-          <h3 class="font-bold text-sm">비행운</h3>
-          <p class="text-xs text-slate-500 mt-1">문문</p>
-        </div>
-      </div>
+      <div class="bg-white dark:bg-slate-800 p-4 rounded-3xl border border-slate-100 dark:border-slate-800 shadow-sm hover:shadow-lg transition-all">
+    
+      <div class="h-32 bg-purple-100 dark:bg-purple-900/30 rounded-2xl mb-4 flex items-center justify-center text-purple-500 overflow-hidden">
+      
+      <img src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcR3KhNYqlBgKiCVFFIhx3_OEWq_Z1kX-XImUgkzfcQ0-A&s=10" 
+           class="w-full h-full object-cover">
+           
+    </div>
+    
+    <h3 class="font-bold text-sm">pretender</h3>
+    <p class="text-xs text-slate-500 mt-1">Official髭男dism</p>
+  </div>
+</div>
       <div class="music-card-wrapper fade-in col-span-2 md:col-span-1" data-genre="indie">
-        <div class="bg-white dark:bg-slate-800 p-4 rounded-3xl border border-slate-100 dark:border-slate-800 shadow-sm hover:shadow-lg transition-all">
-          <div class="h-32 bg-purple-100 dark:bg-purple-900/30 rounded-2xl mb-4 flex items-center justify-center text-purple-500">
-            <i data-lucide="disc" class="w-12 h-12"></i>
-          </div>
-          <h3 class="font-bold text-sm">기다림</h3>
-          <p class="text-xs text-slate-500 mt-1">검정치마</p>
-        </div>
-      </div>
-
+      <div class="bg-white dark:bg-slate-800 p-4 rounded-3xl border border-slate-100 dark:border-slate-800 shadow-sm hover:shadow-lg transition-all">
+    
+      <div class="h-32 bg-purple-100 dark:bg-purple-900/30 rounded-2xl mb-4 flex items-center justify-center text-purple-500 overflow-hidden">
+      
+      <img src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQcE6XjfOdEIvfDVpn6vynMkzJBHM5agc6bDil82Bl7fA&s=10" 
+           class="w-full h-full object-cover">
+           
+    </div>
+    
+    <h3 class="font-bold text-sm">flashback</h3>
+    <p class="text-xs text-slate-500 mt-1">엔플라잉</p>
+  </div>
+</div>
       <!-- 발라드 카테고리 (4곡) -->
       <div class="music-card-wrapper fade-in col-span-2 md:col-span-1" data-genre="ballad">
-        <div class="bg-white dark:bg-slate-800 p-4 rounded-3xl border border-slate-100 dark:border-slate-800 shadow-sm hover:shadow-lg transition-all">
-          <div class="h-32 bg-pink-100 dark:bg-pink-900/30 rounded-2xl mb-4 flex items-center justify-center text-pink-500">
-            <i data-lucide="mic" class="w-12 h-12"></i>
-          </div>
-          <h3 class="font-bold text-sm">기억의 습작</h3>
-          <p class="text-xs text-slate-500 mt-1">김동률</p>
-        </div>
-      </div>
+      <div class="bg-white dark:bg-slate-800 p-4 rounded-3xl border border-slate-100 dark:border-slate-800 shadow-sm hover:shadow-lg transition-all">
+    
+      <div class="h-32 bg-purple-100 dark:bg-purple-900/30 rounded-2xl mb-4 flex items-center justify-center text-purple-500 overflow-hidden">
+      
+      <img src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQp_QR66Hv_Mogg3ynSD0eGGsbynBgFYy8aEvKHtTlrSA&s=10"
+           class="w-full h-full object-cover">
+           
+    </div>
+    
+    <h3 class="font-bold text-sm">심</h3>
+    <p class="text-xs text-slate-500 mt-1">디셈버</p>
+  </div>
+</div>
       <div class="music-card-wrapper fade-in col-span-2 md:col-span-1" data-genre="ballad">
-        <div class="bg-white dark:bg-slate-800 p-4 rounded-3xl border border-slate-100 dark:border-slate-800 shadow-sm hover:shadow-lg transition-all">
-          <div class="h-32 bg-pink-100 dark:bg-pink-900/30 rounded-2xl mb-4 flex items-center justify-center text-pink-500">
-            <i data-lucide="heart" class="w-12 h-12"></i>
-          </div>
-          <h3 class="font-bold text-sm">야생화</h3>
-          <p class="text-xs text-slate-500 mt-1">박효신</p>
-        </div>
-      </div>
+      <div class="bg-white dark:bg-slate-800 p-4 rounded-3xl border border-slate-100 dark:border-slate-800 shadow-sm hover:shadow-lg transition-all">
+    
+      <div class="h-32 bg-purple-100 dark:bg-purple-900/30 rounded-2xl mb-4 flex items-center justify-center text-purple-500 overflow-hidden">
+      
+      <img src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcRzfHLEPdOpTSUaUxmeBbIuVnOGErPa0k_3NRKO3gbL0A&s=10" 
+           class="w-full h-full object-cover">
+           
+    </div>
+    
+    <h3 class="font-bold text-sm">천상연</h3>
+    <p class="text-xs text-slate-500 mt-1">이창섭</p>
+  </div>
+</div>
       <div class="music-card-wrapper fade-in col-span-2 md:col-span-1" data-genre="ballad">
-        <div class="bg-white dark:bg-slate-800 p-4 rounded-3xl border border-slate-100 dark:border-slate-800 shadow-sm hover:shadow-lg transition-all">
-          <div class="h-32 bg-pink-100 dark:bg-pink-900/30 rounded-2xl mb-4 flex items-center justify-center text-pink-500">
-            <i data-lucide="cloud-rain" class="w-12 h-12"></i>
-          </div>
-          <h3 class="font-bold text-sm">눈의 꽃</h3>
-          <p class="text-xs text-slate-500 mt-1">박효신</p>
-        </div>
-      </div>
+      <div class="bg-white dark:bg-slate-800 p-4 rounded-3xl border border-slate-100 dark:border-slate-800 shadow-sm hover:shadow-lg transition-all">
+    
+      <div class="h-32 bg-purple-100 dark:bg-purple-900/30 rounded-2xl mb-4 flex items-center justify-center text-purple-500 overflow-hidden">
+      
+      <img src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcSkaw5i5NeUgXChrT8WuqMuqcpF-Yd1H7eMH2P6G_EgEQ&s=10" 
+           class="w-full h-full object-cover">
+           
+    </div>
+    
+    <h3 class="font-bold text-sm">우리 둘만 아는</h3>
+    <p class="text-xs text-slate-500 mt-1">윤건</p>
+  </div>
+</div>
       <div class="music-card-wrapper fade-in col-span-2 md:col-span-1" data-genre="ballad">
-        <div class="bg-white dark:bg-slate-800 p-4 rounded-3xl border border-slate-100 dark:border-slate-800 shadow-sm hover:shadow-lg transition-all">
-          <div class="h-32 bg-pink-100 dark:bg-pink-900/30 rounded-2xl mb-4 flex items-center justify-center text-pink-500">
-            <i data-lucide="clock" class="w-12 h-12"></i>
-          </div>
-          <h3 class="font-bold text-sm">서른 즈음에</h3>
-          <p class="text-xs text-slate-500 mt-1">김광석</p>
-        </div>
-      </div>
+      <div class="bg-white dark:bg-slate-800 p-4 rounded-3xl border border-slate-100 dark:border-slate-800 shadow-sm hover:shadow-lg transition-all">
+    
+      <div class="h-32 bg-purple-100 dark:bg-purple-900/30 rounded-2xl mb-4 flex items-center justify-center text-purple-500 overflow-hidden">
+      
+      <img src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcSeS-u-r6KSEfVrRUQGLzRBySifuPWtNwIIsFPNmJSX3g&s=10" 
+           class="w-full h-full object-cover">
+           
+    </div>
+    
+    <h3 class="font-bold text-sm">내가 아니라도</h3>
+    <p class="text-xs text-slate-500 mt-1">주호</p>
+  </div>
+</div>
 
       <!-- 그 외 카테고리 (4곡) -->
       <div class="music-card-wrapper fade-in col-span-2 md:col-span-1" data-genre="etc">
-        <div class="bg-white dark:bg-slate-800 p-4 rounded-3xl border border-slate-100 dark:border-slate-800 shadow-sm hover:shadow-lg transition-all">
-          <div class="h-32 bg-blue-100 dark:bg-blue-900/30 rounded-2xl mb-4 flex items-center justify-center text-blue-500">
-            <i data-lucide="zap" class="w-12 h-12"></i>
-          </div>
-          <h3 class="font-bold text-sm">Butter</h3>
-          <p class="text-xs text-slate-500 mt-1">BTS</p>
-        </div>
-      </div>
-      <div class="music-card-wrapper fade-in col-span-2 md:col-span-1" data-genre="etc">
-        <div class="bg-white dark:bg-slate-800 p-4 rounded-3xl border border-slate-100 dark:border-slate-800 shadow-sm hover:shadow-lg transition-all">
-          <div class="h-32 bg-blue-100 dark:bg-blue-900/30 rounded-2xl mb-4 flex items-center justify-center text-blue-500">
-            <i data-lucide="sparkles" class="w-12 h-12"></i>
-          </div>
-          <h3 class="font-bold text-sm">Dynamite</h3>
-          <p class="text-xs text-slate-500 mt-1">BTS</p>
-        </div>
-      </div>
-      <div class="music-card-wrapper fade-in col-span-2 md:col-span-1" data-genre="etc">
-        <div class="bg-white dark:bg-slate-800 p-4 rounded-3xl border border-slate-100 dark:border-slate-800 shadow-sm hover:shadow-lg transition-all">
-          <div class="h-32 bg-blue-100 dark:bg-blue-900/30 rounded-2xl mb-4 flex items-center justify-center text-blue-500">
-            <i data-lucide="star" class="w-12 h-12"></i>
-          </div>
-          <h3 class="font-bold text-sm">Hype Boy</h3>
-          <p class="text-xs text-slate-500 mt-1">NewJeans</p>
-        </div>
-      </div>
-      <div class="music-card-wrapper fade-in col-span-2 md:col-span-1" data-genre="etc">
-        <div class="bg-white dark:bg-slate-800 p-4 rounded-3xl border border-slate-100 dark:border-slate-800 shadow-sm hover:shadow-lg transition-all">
-          <div class="h-32 bg-blue-100 dark:bg-blue-900/30 rounded-2xl mb-4 flex items-center justify-center text-blue-500">
-            <i data-lucide="message-circle" class="w-12 h-12"></i>
-          </div>
-          <h3 class="font-bold text-sm">Ditto</h3>
-          <p class="text-xs text-slate-500 mt-1">NewJeans</p>
-        </div>
-      </div>
+      <div class="bg-white dark:bg-slate-800 p-4 rounded-3xl border border-slate-100 dark:border-slate-800 shadow-sm hover:shadow-lg transition-all">
+    
+      <div class="h-32 bg-purple-100 dark:bg-purple-900/30 rounded-2xl mb-4 flex items-center justify-center text-purple-500 overflow-hidden">
+      
+      <img src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcSFBtuYIpsTITDLa1QIxSg5h_wVC5mTdBiH7D2Kzr39Ig&s=10" 
+           class="w-full h-full object-cover">
+           
+    </div>
+    
+    <h3 class="font-bold text-sm">payphone</h3>
+    <p class="text-xs text-slate-500 mt-1">Maroon5</p>
+  </div>
+</div>
+     <div class="music-card-wrapper fade-in col-span-2 md:col-span-1" data-genre="indie">
+      <div class="bg-white dark:bg-slate-800 p-4 rounded-3xl border border-slate-100 dark:border-slate-800 shadow-sm hover:shadow-lg transition-all">
+    
+      <div class="h-32 bg-purple-100 dark:bg-purple-900/30 rounded-2xl mb-4 flex items-center justify-center text-purple-500 overflow-hidden">
+      
+      <img src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcTctod7avHnpBqFeiH6shv3nqo20m5KthEMXUTazKXBhg&s" 
+           class="w-full h-full object-cover">
+           
+    </div>
+    
+    <h3 class="font-bold text-sm">어떻게 지내</h3>
+    <p class="text-xs text-slate-500 mt-1">오반</p>
+  </div>
+</div>
+      <div class="music-card-wrapper fade-in col-span-2 md:col-span-1" data-genre="indie">
+      <div class="bg-white dark:bg-slate-800 p-4 rounded-3xl border border-slate-100 dark:border-slate-800 shadow-sm hover:shadow-lg transition-all">
+    
+      <div class="h-32 bg-purple-100 dark:bg-purple-900/30 rounded-2xl mb-4 flex items-center justify-center text-purple-500 overflow-hidden">
+      
+      <img src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcTykiXp2Fxz6UkEMDx-tYQpcMP8mW8M6mw9iQSVP7POoA&s=10" 
+           class="w-full h-full object-cover">
+           
+    </div>
+    
+    <h3 class="font-bold text-sm">photograph</h3>
+    <p class="text-xs text-slate-500 mt-1">Ed Sheeran</p>
+  </div>
+</div>
+      <div class="music-card-wrapper fade-in col-span-2 md:col-span-1" data-genre="indie">
+      <div class="bg-white dark:bg-slate-800 p-4 rounded-3xl border border-slate-100 dark:border-slate-800 shadow-sm hover:shadow-lg transition-all">
+    
+      <div class="h-32 bg-purple-100 dark:bg-purple-900/30 rounded-2xl mb-4 flex items-center justify-center text-purple-500 overflow-hidden">
+      
+      <img src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcSq_ZLdo0pnsBqH1AWjW-uKHFavYr694U5fnLNqFoOLtw&s" 
+           class="w-full h-full object-cover">
+           
+    </div>
+    
+    <h3 class="font-bold text-sm">마음을 말하는 행복</h3>
+    <p class="text-xs text-slate-500 mt-1">마크툽</p>
+  </div>
+</div>
 
     </section>
   </main>
