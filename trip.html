@@ -1,0 +1,178 @@
+<!DOCTYPE html>
+<html lang="ko" class="scroll-smooth">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>취미생활 - 여행기록 (Travel Log)</title>
+  <script src="https://cdn.tailwindcss.com"></script>
+  <script src="https://unpkg.com/lucide@latest"></script>
+  <script>
+    tailwind.config = {
+      darkMode: 'class',
+      theme: {
+        extend: {
+          colors: {
+            brand: {
+              east: '#8b5cf6', // 동아시아 보라
+              south: '#10b981', // 동남아시아 에메랄드
+              others: '#f59e0b', // 그 외 오렌지
+            }
+          }
+        }
+      }
+    }
+  </script>
+  <style>
+    .transition-theme { transition: background-color 0.3s ease, color 0.3s ease, border-color 0.3s ease; }
+    .fade-in { animation: fadeIn 0.4s ease-out forwards; }
+    @keyframes fadeIn { from { opacity: 0; transform: translateY(10px); } to { opacity: 1; transform: translateY(0); } }
+  </style>
+</head>
+<body class="bg-slate-50 text-slate-800 dark:bg-slate-900 dark:text-slate-100 min-h-screen font-sans transition-theme">
+
+  <header class="sticky top-0 z-50 backdrop-blur-md bg-white/80 dark:bg-slate-900/80 border-b border-slate-200 dark:border-slate-800 transition-theme">
+    <div class="max-w-6xl mx-auto px-4 h-20 flex items-center justify-between">
+      <a href="index.html" class="flex items-center gap-2 font-bold text-xl text-indigo-600 dark:text-indigo-400">
+        <i data-lucide="arrow-left" class="w-5 h-5"></i>
+        <span>메인으로</span>
+      </a>
+      <nav class="hidden md:flex items-center gap-5">
+        <a href="game.html" class="flex items-center gap-2 text-sm font-semibold px-4 py-2.5 rounded-xl border border-slate-200 dark:border-slate-700 bg-white/50 dark:bg-slate-800/50 hover:border-indigo-500 hover:text-indigo-600 transition-all">
+          <i data-lucide="gamepad-2" class="w-4.5 h-4.5 text-indigo-500"></i> 게임
+        </a>
+        <a href="music.html" class="flex items-center gap-2 text-sm font-semibold px-4 py-2.5 rounded-xl border border-slate-200 dark:border-slate-700 bg-white/50 dark:bg-slate-800/50 hover:border-indigo-500 hover:text-indigo-600 transition-all">
+          <i data-lucide="music" class="w-4.5 h-4.5 text-pink-500"></i> 음악
+        </a>
+        <a href="travel.html" class="flex items-center gap-2 text-sm font-bold px-4 py-2.5 rounded-xl border border-emerald-500 bg-emerald-50/50 dark:bg-emerald-950/40 text-emerald-600 dark:text-emerald-400 shadow-sm transition-all">
+          <i data-lucide="compass" class="w-4.5 h-4.5 text-emerald-500"></i> 여행
+        </a>
+      </nav>
+      <div class="flex items-center gap-4">
+        <button id="theme-toggle" class="p-2.5 rounded-xl bg-slate-100 dark:bg-slate-800 hover:ring-2 hover:ring-emerald-500/50 transition-all">
+          <i id="theme-icon" data-lucide="moon" class="w-5 h-5 text-slate-600 dark:text-slate-300"></i>
+        </button>
+      </div>
+    </div>
+  </header>
+
+  <main class="max-w-6xl mx-auto px-4 py-12 space-y-10">
+    <section class="text-center space-y-4">
+      <h1 class="text-4xl font-extrabold tracking-tight">취미생활: 여행 기록함 (Travel Log)</h1>
+      <p class="text-slate-500 dark:text-slate-400">발걸음이 닿았던 소중한 여행지들을 카테고리별로 모았습니다.</p>
+    </section>
+
+    <section class="flex flex-wrap justify-center gap-3">
+      <button onclick="filterTravel('all')" id="btn-all" class="filter-btn px-5 py-2 text-sm font-bold rounded-full bg-emerald-600 text-white shadow-sm transition-all">전체</button>
+      <button onclick="filterTravel('east-asia')" id="btn-east-asia" class="filter-btn px-5 py-2 text-sm font-semibold rounded-full bg-white dark:bg-slate-800 border border-slate-200 dark:border-slate-700 hover:border-purple-500 hover:text-purple-500 transition-all text-slate-600 dark:text-slate-300">동아시아</button>
+      <button onclick="filterTravel('southeast-asia')" id="btn-southeast-asia" class="filter-btn px-5 py-2 text-sm font-semibold rounded-full bg-white dark:bg-slate-800 border border-slate-200 dark:border-slate-700 hover:border-emerald-500 hover:text-emerald-500 transition-all text-slate-600 dark:text-slate-300">동남아시아</button>
+      <button onclick="filterTravel('others')" id="btn-others" class="filter-btn px-5 py-2 text-sm font-semibold rounded-full bg-white dark:bg-slate-800 border border-slate-200 dark:border-slate-700 hover:border-amber-500 hover:text-amber-500 transition-all text-slate-600 dark:text-slate-300">그 외</button>
+    </section>
+
+    <section id="travel-container" class="grid grid-cols-2 md:grid-cols-4 gap-6 max-w-5xl mx-auto">
+      
+      <!-- 동아시아 (3곡) -->
+      <div class="travel-card-wrapper fade-in col-span-2 md:col-span-1" data-region="east-asia">
+        <div class="bg-white dark:bg-slate-800 p-4 rounded-3xl border border-slate-100 dark:border-slate-800 shadow-sm hover:shadow-lg transition-all">
+          <div class="h-32 bg-purple-100 dark:bg-purple-900/30 rounded-2xl mb-4 flex items-center justify-center text-purple-500"><i data-lucide="mountain" class="w-12 h-12"></i></div>
+          <h3 class="font-bold text-sm">일본</h3>
+          <p class="text-xs text-slate-500 mt-1">도쿄 & 오사카</p>
+        </div>
+      </div>
+      <div class="travel-card-wrapper fade-in col-span-2 md:col-span-1" data-region="east-asia">
+        <div class="bg-white dark:bg-slate-800 p-4 rounded-3xl border border-slate-100 dark:border-slate-800 shadow-sm hover:shadow-lg transition-all">
+          <div class="h-32 bg-purple-100 dark:bg-purple-900/30 rounded-2xl mb-4 flex items-center justify-center text-purple-500"><i data-lucide="landmark" class="w-12 h-12"></i></div>
+          <h3 class="font-bold text-sm">중국</h3>
+          <p class="text-xs text-slate-500 mt-1">북경 & 상하이</p>
+        </div>
+      </div>
+      <div class="travel-card-wrapper fade-in col-span-2 md:col-span-1" data-region="east-asia">
+        <div class="bg-white dark:bg-slate-800 p-4 rounded-3xl border border-slate-100 dark:border-slate-800 shadow-sm hover:shadow-lg transition-all">
+          <div class="h-32 bg-purple-100 dark:bg-purple-900/30 rounded-2xl mb-4 flex items-center justify-center text-purple-500"><i data-lucide="utensils" class="w-12 h-12"></i></div>
+          <h3 class="font-bold text-sm">대만</h3>
+          <p class="text-xs text-slate-500 mt-1">타이베이</p>
+        </div>
+      </div>
+
+      <!-- 동남아시아 (3곡) -->
+      <div class="travel-card-wrapper fade-in col-span-2 md:col-span-1" data-region="southeast-asia">
+        <div class="bg-white dark:bg-slate-800 p-4 rounded-3xl border border-slate-100 dark:border-slate-800 shadow-sm hover:shadow-lg transition-all">
+          <div class="h-32 bg-emerald-100 dark:bg-emerald-900/30 rounded-2xl mb-4 flex items-center justify-center text-emerald-500"><i data-lucide="building-2" class="w-12 h-12"></i></div>
+          <h3 class="font-bold text-sm">싱가포르</h3>
+          <p class="text-xs text-slate-500 mt-1">마리나 베이</p>
+        </div>
+      </div>
+      <div class="travel-card-wrapper fade-in col-span-2 md:col-span-1" data-region="southeast-asia">
+        <div class="bg-white dark:bg-slate-800 p-4 rounded-3xl border border-slate-100 dark:border-slate-800 shadow-sm hover:shadow-lg transition-all">
+          <div class="h-32 bg-emerald-100 dark:bg-emerald-900/30 rounded-2xl mb-4 flex items-center justify-center text-emerald-500"><i data-lucide="palm-tree" class="w-12 h-12"></i></div>
+          <h3 class="font-bold text-sm">말레이시아</h3>
+          <p class="text-xs text-slate-500 mt-1">쿠알라룸푸르</p>
+        </div>
+      </div>
+      <div class="travel-card-wrapper fade-in col-span-2 md:col-span-1" data-region="southeast-asia">
+        <div class="bg-white dark:bg-slate-800 p-4 rounded-3xl border border-slate-100 dark:border-slate-800 shadow-sm hover:shadow-lg transition-all">
+          <div class="h-32 bg-emerald-100 dark:bg-emerald-900/30 rounded-2xl mb-4 flex items-center justify-center text-emerald-500"><i data-lucide="coffee" class="w-12 h-12"></i></div>
+          <h3 class="font-bold text-sm">베트남</h3>
+          <p class="text-xs text-slate-500 mt-1">다낭 & 하노이</p>
+        </div>
+      </div>
+
+      <!-- 그 외 (2곡) -->
+      <div class="travel-card-wrapper fade-in col-span-2 md:col-span-1" data-region="others">
+        <div class="bg-white dark:bg-slate-800 p-4 rounded-3xl border border-slate-100 dark:border-slate-800 shadow-sm hover:shadow-lg transition-all">
+          <div class="h-32 bg-amber-100 dark:bg-amber-900/30 rounded-2xl mb-4 flex items-center justify-center text-amber-500"><i data-lucide="plane" class="w-12 h-12"></i></div>
+          <h3 class="font-bold text-sm">미국</h3>
+          <p class="text-xs text-slate-500 mt-1">뉴욕 & LA</p>
+        </div>
+      </div>
+      <div class="travel-card-wrapper fade-in col-span-2 md:col-span-1" data-region="others">
+        <div class="bg-white dark:bg-slate-800 p-4 rounded-3xl border border-slate-100 dark:border-slate-800 shadow-sm hover:shadow-lg transition-all">
+          <div class="h-32 bg-amber-100 dark:bg-amber-900/30 rounded-2xl mb-4 flex items-center justify-center text-amber-500"><i data-lucide="sun" class="w-12 h-12"></i></div>
+          <h3 class="font-bold text-sm">터키</h3>
+          <p class="text-xs text-slate-500 mt-1">이스탄불 & 카파도키아</p>
+        </div>
+      </div>
+
+    </section>
+  </main>
+
+  <script>
+    lucide.createIcons();
+
+    // Theme toggle
+    const themeToggleBtn = document.getElementById('theme-toggle');
+    const themeIcon = document.getElementById('theme-icon');
+    if (localStorage.theme === 'dark' || (!('theme' in localStorage) && window.matchMedia('(prefers-color-scheme: dark)').matches)) {
+      document.documentElement.classList.add('dark');
+      themeIcon.setAttribute('data-lucide', 'sun');
+    }
+    themeToggleBtn.addEventListener('click', () => {
+      const isDark = document.documentElement.classList.toggle('dark');
+      localStorage.theme = isDark ? 'dark' : 'light';
+      themeIcon.setAttribute('data-lucide', isDark ? 'sun' : 'moon');
+      lucide.createIcons();
+    });
+
+    // Filtering logic
+    function filterTravel(region) {
+      const wrappers = document.querySelectorAll('.travel-card-wrapper');
+      const buttons = document.querySelectorAll('.filter-btn');
+
+      buttons.forEach(btn => {
+        if (btn.id === `btn-${region}`) {
+          btn.className = "filter-btn px-5 py-2 text-sm font-bold rounded-full bg-emerald-600 text-white shadow-sm transition-all";
+        } else {
+          btn.className = "filter-btn px-5 py-2 text-sm font-semibold rounded-full bg-white dark:bg-slate-800 border border-slate-200 dark:border-slate-700 hover:border-emerald-500 hover:text-emerald-500 transition-all text-slate-600 dark:text-slate-300";
+        }
+      });
+
+      wrappers.forEach(wrap => {
+        if (region === 'all' || wrap.getAttribute('data-region') === region) {
+          wrap.style.display = 'block';
+        } else {
+          wrap.style.display = 'none';
+        }
+      });
+    }
+  </script>
+</body>
+</html>
