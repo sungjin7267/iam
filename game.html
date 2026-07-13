@@ -1,0 +1,522 @@
+<!DOCTYPE html>
+<html lang="ko" class="scroll-smooth">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>취미생활 - 게임에 진심인 편</title>
+  <!-- Tailwind CSS CDN -->
+  <script src="https://cdn.tailwindcss.com"></script>
+  <!-- Lucide Icons -->
+  <script src="https://unpkg.com/lucide@latest"></script>
+  <script>
+    tailwind.config = {
+      darkMode: 'class',
+      theme: {
+        extend: {
+          colors: {
+            brand: {
+              lol: '#c89b3c', // 롤 골드
+              ow: '#f99e1a',  // 오버워치 오렌지
+              pubg: '#f2a900', // 배그 노랑
+              pokemon: '#ffcb05', // 포켓몬 옐로우
+            }
+          }
+        }
+      }
+    }
+  </script>
+  <style>
+    .transition-theme {
+      transition: background-color 0.3s ease, color 0.3s ease, border-color 0.3s ease;
+    }
+    /* 서서히 밝아지며 밀려오는 트랜지션 애니메이션 */
+    .extra-card-anim {
+      animation: slideInRight 0.5s cubic-bezier(0.16, 1, 0.3, 1) forwards;
+    }
+    @keyframes slideInRight {
+      from {
+        opacity: 0;
+        transform: translateX(20px);
+      }
+      to {
+        opacity: 1;
+        transform: translateX(0);
+      }
+    }
+  </style>
+</head>
+<body class="bg-slate-50 text-slate-800 dark:bg-slate-900 dark:text-slate-100 min-h-screen font-sans transition-theme">
+
+  <!-- 1. 상단 네비게이션 바 -->
+  <header class="sticky top-0 z-50 backdrop-blur-md bg-white/80 dark:bg-slate-900/80 border-b border-slate-200 dark:border-slate-800 transition-theme">
+    <div class="max-w-6xl mx-auto px-4 h-20 flex items-center justify-between">
+      <!-- 로고 / 홈 링크 -->
+      <a href="index.html" class="flex items-center gap-2 font-bold text-xl text-indigo-600 dark:text-indigo-400 hover:opacity-90 transition-opacity">
+        <i data-lucide="arrow-left" class="w-5 h-5"></i>
+        <span>메인으로</span>
+      </a>
+
+      <!-- 취미 버튼들 -->
+      <nav class="hidden md:flex items-center gap-5">
+        <a href="game.html" class="flex items-center gap-2 text-sm font-bold px-4 py-2.5 rounded-xl border border-indigo-500 bg-indigo-50/50 dark:bg-indigo-950/40 text-indigo-600 dark:text-indigo-400 shadow-sm transition-all">
+          <i data-lucide="gamepad-2" class="w-4.5 h-4.5 text-indigo-500"></i> 게임
+        </a>
+        <a href="music.html" class="flex items-center gap-2 text-sm font-semibold px-4 py-2.5 rounded-xl border border-slate-200 dark:border-slate-700 bg-white/50 dark:bg-slate-800/50 hover:border-indigo-500 hover:text-indigo-600 dark:hover:border-indigo-400 dark:hover:bg-slate-800 hover:shadow-sm transition-all">
+          <i data-lucide="music" class="w-4.5 h-4.5 text-pink-500"></i> 음악
+        </a>
+        <a href="travel.html" class="flex items-center gap-2 text-sm font-semibold px-4 py-2.5 rounded-xl border border-slate-200 dark:border-slate-700 bg-white/50 dark:bg-slate-800/50 hover:border-indigo-500 hover:text-indigo-600 dark:hover:border-indigo-400 dark:hover:bg-slate-800 hover:shadow-sm transition-all">
+          <i data-lucide="compass" class="w-4.5 h-4.5 text-emerald-500"></i> 여행
+        </a>
+      </nav>
+
+      <!-- 우측 컨트롤 -->
+      <div class="flex items-center gap-4">
+        <button id="theme-toggle" class="p-2.5 rounded-xl bg-slate-100 dark:bg-slate-800 hover:ring-2 hover:ring-indigo-500/50 transition-all">
+          <i id="theme-icon" data-lucide="moon" class="w-5 h-5 text-slate-600 dark:text-slate-300"></i>
+        </button>
+        <button id="mobile-menu-btn" class="md:hidden p-2.5 rounded-xl hover:bg-slate-100 dark:hover:bg-slate-800">
+          <i data-lucide="menu" class="w-6 h-6"></i>
+        </button>
+      </div>
+    </div>
+
+    <!-- 모바일 메뉴 -->
+    <div id="mobile-menu" class="hidden md:hidden border-b border-slate-200 dark:border-slate-800 bg-white dark:bg-slate-900 px-4 py-4 space-y-2">
+      <a href="game.html" class="mobile-link flex items-center gap-3 py-2.5 px-4 text-sm font-bold rounded-lg border border-indigo-500 bg-indigo-50 dark:bg-indigo-950 text-indigo-600">
+        <i data-lucide="gamepad-2" class="w-4 h-4 text-indigo-500"></i> 게임 (현재 페이지)
+      </a>
+      <a href="music.html" class="mobile-link flex items-center gap-3 py-2.5 px-4 text-sm font-medium rounded-lg border border-slate-100 dark:border-slate-800">
+        <i data-lucide="music" class="w-4 h-4 text-pink-500"></i> 음악 바로가기
+      </a>
+      <a href="travel.html" class="mobile-link flex items-center gap-3 py-2.5 px-4 text-sm font-medium rounded-lg border border-slate-100 dark:border-slate-800">
+        <i data-lucide="compass" class="w-4 h-4 text-emerald-500"></i> 여행 바로가기
+      </a>
+    </div>
+  </header>
+
+  <!-- 메인 콘텐츠 영역 -->
+  <main class="max-w-6xl mx-auto px-4 py-12 space-y-12">
+    
+    <!-- 히어로 타이틀 섹션 -->
+    <section class="text-center space-y-4 max-w-2xl mx-auto">
+      <div class="inline-flex items-center gap-2 px-3 py-1.5 rounded-full bg-indigo-100 dark:bg-indigo-900/30 text-indigo-600 dark:text-indigo-400 text-xs font-bold">
+        <i data-lucide="award" class="w-4 h-4"></i>
+        <span>MY GAME ROOM & STATUS</span>
+      </div>
+      <h1 class="text-4xl font-extrabold tracking-tight">취미생활: 게임방 (Game Room)</h1>
+      <p class="text-slate-500 dark:text-slate-400">
+        각 카테고리를 선택하면, 해당 게임의 세부 티어 정보 및 시각적인 컬렉션 프로필이 우측에 화려하게 나타납니다!
+      </p>
+    </section>
+
+    <!-- 인터랙티브 카테고리 필터 -->
+    <section class="flex flex-wrap justify-center gap-3">
+      <button onclick="filterGames('all')" id="filter-all" class="filter-btn px-5 py-2 text-sm font-bold rounded-full bg-indigo-600 text-white shadow-sm transition-all">전체</button>
+      <button onclick="filterGames('lol')" id="filter-lol" class="filter-btn px-5 py-2 text-sm font-semibold rounded-full bg-white dark:bg-slate-800 border border-slate-200 dark:border-slate-700 hover:border-indigo-500 hover:text-indigo-500 transition-all text-slate-600 dark:text-slate-300">리그 오브 레전드</button>
+      <button onclick="filterGames('ow')" id="filter-ow" class="filter-btn px-5 py-2 text-sm font-semibold rounded-full bg-white dark:bg-slate-800 border border-slate-200 dark:border-slate-700 hover:border-indigo-500 hover:text-indigo-500 transition-all text-slate-600 dark:text-slate-300">오버워치</button>
+      <button onclick="filterGames('pubg')" id="filter-pubg" class="filter-btn px-5 py-2 text-sm font-semibold rounded-full bg-white dark:bg-slate-800 border border-slate-200 dark:border-slate-700 hover:border-indigo-500 hover:text-indigo-500 transition-all text-slate-600 dark:text-slate-300">배틀그라운드</button>
+      <button onclick="filterGames('pokemon')" id="filter-pokemon" class="filter-btn px-5 py-2 text-sm font-semibold rounded-full bg-white dark:bg-slate-800 border border-slate-200 dark:border-slate-700 hover:border-indigo-500 hover:text-indigo-500 transition-all text-slate-600 dark:text-slate-300">포켓몬</button>
+    </section>
+
+    <!-- 게임 및 추가 티어 상세 정보 컨테이너 그리드 -->
+    <section id="games-container" class="grid grid-cols-1 md:grid-cols-2 gap-8 max-w-5xl mx-auto transition-all duration-500">
+      
+      <!-- [1] 리그 오브 레전드 영역 -->
+      <div class="game-item-wrapper col-span-1 flex flex-col gap-6" data-category="lol">
+        <!-- 기본 카드 (높이를 lg:h-[410px] w-full로 고정하여 포켓몬 카드와 비율을 일치시켰습니다) -->
+        <div class="game-card bg-white dark:bg-slate-800 rounded-3xl border border-slate-100 dark:border-slate-800/80 shadow-sm overflow-hidden flex flex-col lg:h-[410px] w-full">
+          <div class="h-44 bg-gradient-to-br from-amber-600/20 to-blue-900/30 flex items-center justify-center p-6 relative">
+            <svg class="w-20 h-20 text-amber-500" viewBox="0 0 100 100" fill="none" stroke="currentColor" stroke-width="2">
+              <path d="M50 15 L80 40 L65 85 L50 75 L35 85 L20 40 Z" fill="none" stroke-width="3" />
+              <circle cx="50" cy="48" r="15" fill="none" stroke-dasharray="4 2" />
+              <path d="M50 5 L50 95 M5 50 L95 50" stroke-opacity="0.3" />
+            </svg>
+            <span class="absolute top-4 right-4 bg-amber-500/10 text-amber-600 dark:text-amber-400 px-3 py-1 text-xs font-bold rounded-full">AOS / 전략</span>
+          </div>
+          <!-- 피드백 반영: 설명과 제목이 크게 벌어지지 않도록 gap-3 컴팩트 구성 -->
+          <div class="p-6 space-y-3 flex-1 flex flex-col justify-between">
+            <h3 class="text-xl font-bold text-slate-800 dark:text-slate-100">리그 오브 레전드 <span class="text-sm font-semibold text-amber-500">(LoL)</span></h3>
+            <p class="text-sm text-slate-500 dark:text-slate-400 leading-relaxed">
+              5명이 팀을 이루어 소환사의 협곡에서 치열하게 수싸움을 벌이는 팀 기반 AOS 게임입니다. 
+              뛰어난 협동성과 판단력, 그리고 실시간 대처가 어우러져 플레이할 때마다 매판 흥미로운 변수가 가득합니다.
+            </p>
+          </div>
+        </div>
+
+        <!-- [추가 카드] 리그 오브 레전드 전용 상세 및 티어 컨테이너 (평소 숨김, 필터링 시 노출) -->
+        <div class="extra-card hidden extra-card-anim bg-gradient-to-br from-indigo-500/5 to-purple-500/5 dark:from-indigo-950/20 dark:to-purple-950/20 border border-indigo-100 dark:border-indigo-900/40 p-6 rounded-3xl space-y-5">
+          <div class="flex items-center justify-between border-b border-indigo-100 dark:border-indigo-900/30 pb-3">
+            <div class="flex items-center gap-2">
+              <i data-lucide="crown" class="w-5 h-5 text-indigo-500"></i>
+              <span class="font-extrabold text-sm uppercase tracking-wide">Summoner Profile</span>
+            </div>
+            <span class="text-xs bg-indigo-100 dark:bg-indigo-950 px-2.5 py-1 rounded-full text-indigo-600 dark:text-indigo-400 font-bold">LOL 전적</span>
+          </div>
+          <!-- 티어 정보 박스 (가로 정렬 완료) -->
+          <div class="p-4 rounded-2xl bg-white dark:bg-slate-800 shadow-sm border border-slate-100 dark:border-slate-800 flex flex-col gap-1.5">
+            <div class="flex items-center justify-between">
+              <span class="text-xs font-semibold text-slate-400">현재 시즌 랭크</span>
+              <span class="px-2.5 py-0.5 text-[10px] font-extrabold rounded-full bg-gradient-to-r from-teal-500/10 to-indigo-500/10 text-indigo-600 dark:text-indigo-400">💎 PLATINUM</span>
+            </div>
+            <span class="font-black text-lg text-indigo-600 dark:text-indigo-400">플래티넘</span>
+          </div>
+          <!-- 챔피언 그래픽/사진 영역 (가로형 배치 완료) -->
+          <div class="space-y-3">
+            <p class="text-xs font-semibold text-slate-400">나의 선호 최애 챔피언</p>
+            <div class="grid grid-cols-1 gap-3">
+              <!-- Ezreal -->
+              <div class="p-4 rounded-xl bg-white dark:bg-slate-800 shadow-sm flex items-center gap-4 border border-slate-100 dark:border-slate-800">
+                <svg class="w-12 h-12 text-indigo-500 flex-shrink-0 animate-pulse" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5">
+                  <path stroke-linecap="round" stroke-linejoin="round" d="M12 3v18M3 12h18M12 3l9 9-9 9-9-9 9-9z" />
+                </svg>
+                <div>
+                  <span class="text-xs font-bold block">이즈리얼 (Ezreal)</span>
+                  <span class="text-[10px] text-slate-400 block mt-0.5">신비한 화살 🎯</span>
+                </div>
+              </div>
+              <!-- Yasuo -->
+              <div class="p-4 rounded-xl bg-white dark:bg-slate-800 shadow-sm flex items-center gap-4 border border-slate-100 dark:border-slate-800">
+                <svg class="w-12 h-12 text-teal-500 flex-shrink-0" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5">
+                  <path stroke-linecap="round" stroke-linejoin="round" d="M13 10V3L4 14h7v7l9-11h-7z" />
+                </svg>
+                <div>
+                  <span class="text-xs font-bold block">야스오 (Yasuo)</span>
+                  <span class="text-[10px] text-slate-400 block mt-0.5">하세기! 🌪️</span>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- [2] 오버워치 영역 -->
+      <div class="game-item-wrapper col-span-1 flex flex-col gap-6" data-category="ow">
+        <!-- 기본 카드 (높이를 lg:h-[410px] w-full로 고정하여 일관성 있게 구성했습니다) -->
+        <div class="game-card bg-white dark:bg-slate-800 rounded-3xl border border-slate-100 dark:border-slate-800/80 shadow-sm overflow-hidden flex flex-col lg:h-[410px] w-full">
+          <div class="h-44 bg-gradient-to-br from-orange-600/20 to-slate-900/30 flex items-center justify-center p-6 relative">
+            <svg class="w-20 h-20 text-orange-500" viewBox="0 0 100 100" fill="none" stroke="currentColor" stroke-width="3">
+              <circle cx="50" cy="50" r="40" stroke-width="8" stroke-dasharray="200" />
+              <path d="M30 40 L50 20 L70 40" stroke-width="8" stroke-linecap="round" />
+              <path d="M30 65 L50 85 L70 65" stroke-width="8" stroke-linecap="round" />
+            </svg>
+            <span class="absolute top-4 right-4 bg-orange-500/10 text-orange-600 dark:text-orange-400 px-3 py-1 text-xs font-bold rounded-full">하이퍼 FPS</span>
+          </div>
+          <!-- 피드백 반영: 설명과 제목이 크게 벌어지지 않도록 gap-3 컴팩트 구성 -->
+          <div class="p-6 space-y-3 flex-1 flex flex-col justify-between">
+            <h3 class="text-xl font-bold text-slate-800 dark:text-slate-100">오버워치 2 <span class="text-sm font-semibold text-orange-500">(Overwatch 2)</span></h3>
+            <p class="text-sm text-slate-500 dark:text-slate-400 leading-relaxed">
+              각자 개성 있는 스킬을 지닌 영웅들을 선택하여 목표를 달성하는 FPS 팀 대전 게임입니다. 
+              상황에 맞춰 즉각 영웅을 변경하고 아군의 궁극기 조율 시에 터져 나오는 전략적 쾌감이 매력적입니다.
+            </p>
+          </div>
+        </div>
+
+        <!-- [추가 카드] 오버워치 전용 상세 및 티어 컨테이너 (가로 배치 완료) -->
+        <div class="extra-card hidden extra-card-anim bg-gradient-to-br from-orange-500/5 to-amber-500/5 dark:from-orange-950/20 dark:to-amber-950/20 border border-orange-100 dark:border-orange-900/40 p-6 rounded-3xl space-y-5">
+          <div class="flex items-center justify-between border-b border-orange-100 dark:border-orange-900/30 pb-3">
+            <div class="flex items-center gap-2">
+              <i data-lucide="shield" class="w-5 h-5 text-orange-500"></i>
+              <span class="font-extrabold text-sm uppercase tracking-wide">Hero Career</span>
+            </div>
+            <span class="text-xs bg-orange-100 dark:bg-orange-950 px-2.5 py-1 rounded-full text-orange-600 dark:text-orange-400 font-bold">오버워치 전적</span>
+          </div>
+          <!-- 티어 정보 박스 (가로 정렬 완료) -->
+          <div class="p-4 rounded-2xl bg-white dark:bg-slate-800 shadow-sm border border-slate-100 dark:border-slate-800 flex flex-col gap-1.5">
+            <div class="flex items-center justify-between">
+              <span class="text-xs font-semibold text-slate-400">현재 경쟁전 등급</span>
+              <span class="px-2.5 py-0.5 text-[10px] font-extrabold rounded-full bg-gradient-to-r from-orange-500/10 to-amber-500/10 text-orange-600 dark:text-orange-400">💎 PLATINUM</span>
+            </div>
+            <span class="font-black text-lg text-orange-600 dark:text-orange-400">플래티넘</span>
+          </div>
+          <!-- 대표 캐릭터 그래픽/사진 영역 (가로형 배치 완료) -->
+          <div class="space-y-3">
+            <p class="text-xs font-semibold text-slate-400">가장 선호하는 플레이 영웅</p>
+            <div class="grid grid-cols-1 gap-3">
+              <!-- Genji -->
+              <div class="p-4 rounded-xl bg-white dark:bg-slate-800 shadow-sm flex items-center gap-4 border border-slate-100 dark:border-slate-800">
+                <svg class="w-12 h-12 text-emerald-500 flex-shrink-0 animate-spin" style="animation-duration: 8s;" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5">
+                  <path stroke-linecap="round" stroke-linejoin="round" d="M12 3v18M3 12h18M5.22 5.22l13.56 13.56M18.78 5.22L5.22 18.78" />
+                </svg>
+                <div>
+                  <span class="text-xs font-bold block">겐지 (Genji)</span>
+                  <span class="text-[10px] text-slate-400 block mt-0.5">류승룡 기모찌! ⚔️</span>
+                </div>
+              </div>
+              <!-- Ana -->
+              <div class="p-4 rounded-xl bg-white dark:bg-slate-800 shadow-sm flex items-center gap-4 border border-slate-100 dark:border-slate-800">
+                <svg class="w-12 h-12 text-orange-400 flex-shrink-0" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5">
+                  <path stroke-linecap="round" stroke-linejoin="round" d="M9 12l2 2 4-4m5.618-4.016A11.955 11.955 0 0112 2.944a11.955 11.955 0 01-8.618 3.04A12.02 12.02 0 003 9c0 5.591 3.824 10.29 9 11.622 5.176-1.332 9-6.03 9-11.622 0-1.042-.133-2.052-.382-3.016z" />
+                </svg>
+                <div>
+                  <span class="text-xs font-bold block">아나 (Ana)</span>
+                  <span class="text-[10px] text-slate-400 block mt-0.5">생체 수류탄 🎯</span>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- [3] 배틀그라운드 영역 -->
+      <div class="game-item-wrapper col-span-1 flex flex-col gap-6" data-category="pubg">
+        <!-- 기본 카드 (높이를 lg:h-[410px] w-full로 고정하여 일관성 있게 구성했습니다) -->
+        <div class="game-card bg-white dark:bg-slate-800 rounded-3xl border border-slate-100 dark:border-slate-800/80 shadow-sm overflow-hidden flex flex-col lg:h-[410px] w-full">
+          <div class="h-44 bg-gradient-to-br from-amber-500/20 to-neutral-900/30 flex items-center justify-center p-6 relative">
+            <svg class="w-20 h-20 text-amber-500" viewBox="0 0 100 100" fill="none" stroke="currentColor" stroke-width="3">
+              <rect x="25" y="45" width="50" height="40" rx="4" fill="none" />
+              <path d="M25 45 L50 20 L75 45" />
+              <path d="M50 20 L50 85" stroke-dasharray="4 2" />
+              <path d="M10 10 L25 45" />
+              <path d="M90 10 L75 45" />
+              <path d="M10 10 C30 5, 70 5, 90 10" />
+            </svg>
+            <span class="absolute top-4 right-4 bg-amber-500/10 text-amber-600 dark:text-amber-400 px-3 py-1 text-xs font-bold rounded-full">생존 서바이벌</span>
+          </div>
+          <!-- 피드백 반영: 설명과 제목이 크게 벌어지지 않도록 gap-3 컴팩트 구성 -->
+          <div class="p-6 space-y-3 flex-1 flex flex-col justify-between">
+            <h3 class="text-xl font-bold text-slate-800 dark:text-slate-100">배틀그라운드 <span class="text-sm font-semibold text-amber-500">(PUBG)</span></h3>
+            <p class="text-sm text-slate-500 dark:text-slate-400 leading-relaxed">
+              100명의 플레이어 중 끝까지 살아남아 치킨을 쟁취하는 정통 배틀로얄 게임입니다. 
+              숨 막히는 긴장감 속에 펼쳐지는 사운드 플레이와 예기치 못한 교전에서의 짜릿함이 최고입니다.
+            </p>
+          </div>
+        </div>
+
+        <!-- [추가 카드] 배틀그라운드 전용 상세 및 티어 컨테이너 -->
+        <div class="extra-card hidden extra-card-anim bg-gradient-to-br from-yellow-500/5 to-amber-500/5 dark:from-yellow-950/10 dark:to-amber-950/20 border border-yellow-200 dark:border-yellow-900/40 p-6 rounded-3xl space-y-5">
+          <div class="flex items-center justify-between border-b border-yellow-100 dark:border-yellow-900/30 pb-3">
+            <div class="flex items-center gap-2">
+              <i data-lucide="target" class="w-5 h-5 text-amber-500"></i>
+              <span class="font-extrabold text-sm uppercase tracking-wide">Survival Record</span>
+            </div>
+            <span class="text-xs bg-yellow-100 dark:bg-yellow-950 px-2.5 py-1 rounded-full text-yellow-600 dark:text-amber-500 font-bold">배그 전적</span>
+          </div>
+          <!-- 티어 정보 박스 (가로 정렬 완료) -->
+          <div class="p-4 rounded-2xl bg-white dark:bg-slate-800 shadow-sm border border-slate-100 dark:border-slate-800 flex flex-col gap-1.5">
+            <div class="flex items-center justify-between">
+              <span class="text-xs font-semibold text-slate-400">현재 경쟁전 등급</span>
+              <span class="px-2.5 py-0.5 text-[10px] font-extrabold rounded-full bg-gradient-to-r from-yellow-500/10 to-amber-500/10 text-yellow-600 dark:text-amber-500">💎 PLATINUM</span>
+            </div>
+            <span class="font-black text-lg text-amber-500">플래티넘</span>
+          </div>
+          <!-- 대표 장비/아이템 영역 (가로형 배치 완료) -->
+          <div class="space-y-3">
+            <p class="text-xs font-semibold text-slate-400">가장 자신 있는 지정사수용 화기</p>
+            <div class="grid grid-cols-1 gap-3">
+              <!-- Gun: Beryl -->
+              <div class="p-4 rounded-xl bg-white dark:bg-slate-800 shadow-sm flex items-center gap-4 border border-slate-100 dark:border-slate-800">
+                <svg class="w-12 h-12 text-slate-500 flex-shrink-0" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5">
+                  <path stroke-linecap="round" stroke-linejoin="round" d="M3 10h11l1 1h4v1l-2 2H3V10zM14 10l-1-2H9v2" />
+                  <circle cx="6" cy="15" r="1.5" />
+                  <circle cx="15" cy="15" r="1.5" />
+                </svg>
+                <div>
+                  <span class="text-xs font-bold block">베릴 M762</span>
+                  <span class="text-[10px] text-slate-400 block mt-0.5">근접 최강 돌격소총 🔥</span>
+                </div>
+              </div>
+              <!-- Helmet: Level 3 -->
+              <div class="p-4 rounded-xl bg-white dark:bg-slate-800 shadow-sm flex items-center gap-4 border border-slate-100 dark:border-slate-800">
+                <svg class="w-12 h-12 text-indigo-500 flex-shrink-0" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5">
+                  <path stroke-linecap="round" stroke-linejoin="round" d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z" />
+                </svg>
+                <div>
+                  <span class="text-xs font-bold block">3레벨 헬멧</span>
+                  <span class="text-[10px] text-slate-400 block mt-0.5">절대적인 생존 헤드기어 🪖</span>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- [4] 포켓몬스터 영역 -->
+      <div class="game-item-wrapper col-span-1 flex flex-col gap-6" data-category="pokemon">
+        <!-- 기본 카드 (높이를 lg:h-[410px] w-full로 고정하여 전체 게임의 형태를 완벽히 통일했습니다) -->
+        <div class="game-card bg-white dark:bg-slate-800 rounded-3xl border border-slate-100 dark:border-slate-800/80 shadow-sm overflow-hidden flex flex-col lg:h-[410px] w-full">
+          <div class="h-44 bg-gradient-to-br from-red-500/20 to-slate-900/30 flex items-center justify-center p-6 relative">
+            <svg class="w-20 h-20 text-red-500" viewBox="0 0 100 100" fill="none" stroke="currentColor" stroke-width="3">
+              <circle cx="50" cy="50" r="40" />
+              <line x1="10" y1="50" x2="90" y2="50" stroke-width="5" />
+              <circle cx="50" cy="50" r="12" fill="white" stroke-width="4" />
+              <circle cx="50" cy="50" r="4" fill="currentColor" />
+            </svg>
+            <span class="absolute top-4 right-4 bg-red-500/10 text-red-600 dark:text-red-400 px-3 py-1 text-xs font-bold rounded-full">수집 / 육성</span>
+          </div>
+          <!-- 피드백 반영: 설명과 제목이 크게 벌어지지 않도록 gap-3 컴팩트 구성 -->
+          <div class="p-6 space-y-3 flex-1 flex flex-col justify-between">
+            <h3 class="text-xl font-bold text-slate-800 dark:text-slate-100">포켓몬스터 시리즈 <span class="text-sm font-semibold text-red-500">(Pokémon)</span></h3>
+            <p class="text-sm text-slate-500 dark:text-slate-400 leading-relaxed">
+              넓은 가상의 세계를 모험하며 귀여운 포켓몬 동반자들을 수집하고 함께 팀을 키워나가는 고유한 감성 게임입니다. 
+              플레이하는 것만으로 동심을 자극하고 복잡한 일상을 리프레시해주는 최고의 힐링 콘텐츠입니다.
+            </p>
+          </div>
+        </div>
+
+        <!-- [추가 카드] 포켓몬 전용 상세 및 최애 컨테이너 -->
+        <div class="extra-card hidden extra-card-anim bg-gradient-to-br from-red-500/5 to-pink-500/5 dark:from-red-950/20 dark:to-pink-950/20 border border-red-100 dark:border-red-900/40 p-6 rounded-3xl space-y-5">
+          <div class="flex items-center justify-between border-b border-red-100 dark:border-red-900/30 pb-3">
+            <div class="flex items-center gap-2">
+              <i data-lucide="sparkles" class="w-5 h-5 text-red-500"></i>
+              <span class="font-extrabold text-sm uppercase tracking-wide">Trainer Profile</span>
+            </div>
+            <span class="text-xs bg-red-100 dark:bg-red-950 px-2.5 py-1 rounded-full text-red-600 dark:text-pink-400 font-bold">포켓몬 파트너</span>
+          </div>
+          <!-- 최애 정보 박스 (가로 정렬 완료) -->
+          <div class="p-4 rounded-2xl bg-white dark:bg-slate-800 shadow-sm border border-slate-100 dark:border-slate-800 flex flex-col gap-1.5">
+            <div class="flex items-center justify-between">
+              <span class="text-xs font-semibold text-slate-400">최애 최우선 파트너</span>
+              <span class="px-2.5 py-0.5 text-[10px] font-extrabold rounded-full bg-gradient-to-r from-red-500/10 to-pink-500/10 text-red-600 dark:text-pink-400">💤 SNORLAX</span>
+            </div>
+            <span class="font-black text-lg text-red-600 dark:text-pink-400">잠만보</span>
+          </div>
+          <!-- 대표 몬스터 그래픽/사진 영역 (가로형 배치 완료) -->
+          <div class="space-y-3">
+            <p class="text-xs font-semibold text-slate-400">잠만보를 사랑하는 이유</p>
+            <div class="p-4 rounded-xl bg-white dark:bg-slate-800 shadow-sm flex items-center gap-4 border border-slate-100 dark:border-slate-800">
+              <!-- Sleeping Snorlax SVG (잠자는 모습 형상화) -->
+              <svg class="w-12 h-12 text-slate-400 flex-shrink-0 animate-bounce" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5">
+                <circle cx="12" cy="12" r="8" stroke-dasharray="2 2" />
+                <path d="M7 11h2l-2 2h2M13 8h2l-2 2h2" />
+              </svg>
+              <div>
+                <span class="text-xs font-bold block">풍부한 수면과 평화로움</span>
+                <span class="text-[11px] text-slate-400 leading-tight block mt-0.5">매사에 여유 있고 푹 자는 태도가 제 내면의 이상향이자 가장 귀여운 힐링 마스코트이기 때문입니다.</span>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+
+    </section>
+
+    <!-- 인생게임 명대사 섹션 -->
+    <section class="max-w-3xl mx-auto py-8 text-center space-y-4">
+      <div class="p-8 rounded-3xl bg-indigo-50/50 dark:bg-slate-800/40 border border-slate-100 dark:border-slate-800 text-slate-600 dark:text-slate-300 relative overflow-hidden">
+        <i data-lucide="quote" class="w-12 h-12 text-indigo-400/20 absolute -top-2 -left-2"></i>
+        <p class="text-lg italic font-medium leading-relaxed">
+          "포기하지 않으면 언젠가는 기회가 온다. 게임 속이든 실제 현실에서든 말이다."
+        </p>
+        <p class="text-sm text-slate-400 mt-3 font-semibold">- 어느 게이머의 한마디</p>
+      </div>
+    </section>
+
+  </main>
+
+  <!-- 푸터 -->
+  <footer class="border-t border-slate-200 dark:border-slate-800 bg-white dark:bg-slate-950 mt-20 transition-theme">
+    <div class="max-w-6xl mx-auto px-4 py-8 flex flex-col sm:flex-row items-center justify-between gap-4 text-sm text-slate-500">
+      <p>&copy; 2026 홍길동. All rights reserved.</p>
+      <div class="flex items-center gap-4">
+        <a href="index.html" class="hover:text-indigo-500">메인으로 가기</a>
+      </div>
+    </div>
+  </footer>
+
+  <!-- 자바스크립트 로직 -->
+  <script>
+    // 아이콘 로딩
+    lucide.createIcons();
+
+    // ----------------------------------------------------
+    // 다크 모드 토글 로직
+    // ----------------------------------------------------
+    const themeToggleBtn = document.getElementById('theme-toggle');
+    const themeIcon = document.getElementById('theme-icon');
+
+    if (localStorage.theme === 'dark' || (!('theme' in localStorage) && window.matchMedia('(prefers-color-scheme: dark)').matches)) {
+      document.documentElement.classList.add('dark');
+      updateThemeIcon(true);
+    } else {
+      document.documentElement.classList.remove('dark');
+      updateThemeIcon(false);
+    }
+
+    themeToggleBtn.addEventListener('click', () => {
+      const isDark = document.documentElement.classList.toggle('dark');
+      if (isDark) {
+        localStorage.theme = 'dark';
+        updateThemeIcon(true);
+      } else {
+        localStorage.theme = 'light';
+        updateThemeIcon(false);
+      }
+    });
+
+    function updateThemeIcon(isDark) {
+      if (isDark) {
+        themeIcon.setAttribute('data-lucide', 'sun');
+      } else {
+        themeIcon.setAttribute('data-lucide', 'moon');
+      }
+      lucide.createIcons();
+    }
+
+    // ----------------------------------------------------
+    // 모바일 메뉴 토글
+    // ----------------------------------------------------
+    const mobileMenuBtn = document.getElementById('mobile-menu-btn');
+    const mobileMenu = document.getElementById('mobile-menu');
+    mobileMenuBtn.addEventListener('click', () => {
+      mobileMenu.classList.toggle('hidden');
+    });
+
+    // ----------------------------------------------------
+    // [핵심] 레이아웃 변형 및 동적 필터 카드 처리 로직
+    // ----------------------------------------------------
+    function filterGames(category) {
+      const wrappers = document.querySelectorAll('.game-item-wrapper');
+      const container = document.getElementById('games-container');
+      const buttons = document.querySelectorAll('.filter-btn');
+
+      // 1. 카테고리 필터 탭 색상 하이라이트 제어
+      buttons.forEach(btn => {
+        if (btn.id === `filter-${category}`) {
+          btn.className = "filter-btn px-5 py-2 text-sm font-bold rounded-full bg-indigo-600 text-white shadow-sm transition-all";
+        } else {
+          btn.className = "filter-btn px-5 py-2 text-sm font-semibold rounded-full bg-white dark:bg-slate-800 border border-slate-200 dark:border-slate-700 hover:border-indigo-500 hover:text-indigo-500 transition-all text-slate-600 dark:text-slate-300";
+        }
+      });
+
+      // 2. 레이아웃 분할 형태 설정
+      if (category === 'all') {
+        // 전체 모드일 때는 원래대로 2열 그리드로 바꿈
+        container.className = "grid grid-cols-1 md:grid-cols-2 gap-8 max-w-5xl mx-auto transition-all duration-500";
+        
+        wrappers.forEach(wrap => {
+          // 원래 1개짜리 크기 복원
+          wrap.className = "game-item-wrapper col-span-1 flex flex-col gap-6";
+          wrap.style.display = 'flex';
+          
+          // 추가 정보 영역 숨김
+          const extraCard = wrap.querySelector('.extra-card');
+          if (extraCard) extraCard.classList.add('hidden');
+        });
+      } else {
+        // 개별 상세 보기 모드일 때는 중앙에 꽉 채운 single 컬럼으로 변경
+        container.className = "grid grid-cols-1 max-w-4xl mx-auto transition-all duration-500";
+        
+        wrappers.forEach(wrap => {
+          const cardCategory = wrap.getAttribute('data-category');
+          const extraCard = wrap.querySelector('.extra-card');
+          
+          if (cardCategory === category) {
+            wrap.style.display = 'flex';
+            // 가로 나열을 위해 lg 해상도 이상에서는 2열 구조(기본카드 1개 + 추가티어카드 1개)가 됨!
+            wrap.className = "game-item-wrapper col-span-1 grid grid-cols-1 lg:grid-cols-2 gap-6 items-start w-full";
+            
+            // 추가 정보 영역 활성화 및 스르륵 등장시키기
+            if (extraCard) {
+              extraCard.classList.remove('hidden');
+            }
+          } else {
+            // 다른 게임 카드는 화면에서 숨김
+            wrap.style.display = 'none';
+            if (extraCard) extraCard.classList.add('hidden');
+          }
+        });
+      }
+    }
+  </script>
+</body>
+</html>
